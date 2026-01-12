@@ -53,7 +53,8 @@ class _TimeTrackerScreenState extends State<TimeTrackerScreen> {
 
   Duration? _getCurrentTime(int index) {
     final task = _taskService.tasks[index];
-    if (task.isTracking && _taskService.activeTimer != null) {
+    if (_taskService.activeTask?.name == task.name &&
+        _taskService.activeTimer != null) {
       return _taskService.activeTimer!.elapsedTime;
     }
     return null;
@@ -74,7 +75,8 @@ class _TimeTrackerScreenState extends State<TimeTrackerScreen> {
         itemCount: _taskService.tasks.length,
         itemBuilder: (context, index) {
           final task = _taskService.tasks[index];
-          final isActive = task.isTracking;
+          final isActive =
+              _taskService.activeTask?.name == task.name && task.isTracking;
           final currentTime = _getCurrentTime(index);
 
           return TaskCard(

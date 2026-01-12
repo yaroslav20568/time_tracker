@@ -31,11 +31,18 @@ class TaskService extends ChangeNotifier {
       stopTracking();
     }
 
+    for (var i = 0; i < _tasks.length; i++) {
+      if (i == index) {
+        _tasks[i] = _tasks[i].copyWith(isTracking: true, isPaused: false);
+      } else {
+        _tasks[i] = _tasks[i].copyWith(isTracking: false, isPaused: false);
+      }
+    }
+
     _activeTask = _tasks[index];
     _activeTimer = TimerService();
     _activeTimer!.addListener(_onTimerUpdate);
 
-    _tasks[index] = _tasks[index].copyWith(isTracking: true);
     _activeTimer!.start();
     notifyListeners();
   }
