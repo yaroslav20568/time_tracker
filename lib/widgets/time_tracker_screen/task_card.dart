@@ -36,7 +36,7 @@ class TaskCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      margin: EdgeInsets.zero,
       elevation: 2,
       color: isActive
           ? AppColors.primary.withValues(alpha: 0.1)

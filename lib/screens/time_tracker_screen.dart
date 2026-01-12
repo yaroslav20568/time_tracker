@@ -71,24 +71,42 @@ class _TimeTrackerScreenState extends State<TimeTrackerScreen> {
         elevation: 0,
       ),
       body: SafeArea(
-        child: ListView.builder(
-          padding: const EdgeInsets.symmetric(vertical: 8),
-          itemCount: _taskService.tasks.length,
-          itemBuilder: (context, index) {
-            final task = _taskService.tasks[index];
-            final isActive =
-                _taskService.activeTask?.name == task.name && task.isTracking;
-            final currentTime = _getCurrentTime(index);
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            final screenWidth = MediaQuery.of(context).size.width;
+            final crossAxisCount = screenWidth <= 480 ? 1 : 2;
+            final cardWidth = screenWidth <= 480
+                ? screenWidth - 48
+                : (screenWidth - 64) / 2;
+            final childAspectRatio = cardWidth / 200;
 
-            return TaskCard(
-              task: task,
-              isActive: isActive,
-              currentTime: currentTime,
-              onStart: () => _taskService.startTracking(index),
-              onPause: () => _taskService.pauseTracking(),
-              onResume: () => _taskService.resumeTracking(),
-              onStop: () => _taskService.stopTracking(),
-              onPauseMenu: _showPauseMenu,
+            return GridView.builder(
+              padding: const EdgeInsets.all(16),
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: crossAxisCount,
+                childAspectRatio: childAspectRatio,
+                crossAxisSpacing: 16,
+                mainAxisSpacing: 16,
+              ),
+              itemCount: _taskService.tasks.length,
+              itemBuilder: (context, index) {
+                final task = _taskService.tasks[index];
+                final isActive =
+                    _taskService.activeTask?.name == task.name &&
+                    task.isTracking;
+                final currentTime = _getCurrentTime(index);
+
+                return TaskCard(
+                  task: task,
+                  isActive: isActive,
+                  currentTime: currentTime,
+                  onStart: () => _taskService.startTracking(index),
+                  onPause: () => _taskService.pauseTracking(),
+                  onResume: () => _taskService.resumeTracking(),
+                  onStop: () => _taskService.stopTracking(),
+                  onPauseMenu: _showPauseMenu,
+                );
+              },
             );
           },
         ),
