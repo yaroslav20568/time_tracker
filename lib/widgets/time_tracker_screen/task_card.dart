@@ -81,10 +81,7 @@ class TaskCard extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 12),
-            TimerDisplay(
-              duration: _displayTime,
-              isActive: isActive,
-            ),
+            TimerDisplay(duration: _displayTime, isActive: isActive),
             const SizedBox(height: 12),
             TaskControlButtons(
               isTracking: task.isTracking,

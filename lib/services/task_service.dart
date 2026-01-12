@@ -7,6 +7,7 @@ class TaskService extends ChangeNotifier {
   final List<Task> _tasks = [];
   Task? _activeTask;
   TimerService? _activeTimer;
+  final StorageService _storageService = StorageService();
 
   List<Task> get tasks => List.unmodifiable(_tasks);
   Task? get activeTask => _activeTask;
@@ -14,6 +15,7 @@ class TaskService extends ChangeNotifier {
 
   TaskService() {
     _initializeTasks();
+    _loadCachedTasks();
   }
 
   void _initializeTasks() {
@@ -22,6 +24,23 @@ class TaskService extends ChangeNotifier {
       _tasks.add(Task(name: taskName));
     }
     notifyListeners();
+  }
+
+  Future<void> _loadCachedTasks() async {
+    final cachedTasks = await _storageService.loadTasks();
+    final cachedTasksMap = {for (var task in cachedTasks) task.name: task};
+
+    for (var i = 0; i < _tasks.length; i++) {
+      final taskName = _tasks[i].name;
+      if (cachedTasksMap.containsKey(taskName)) {
+        _tasks[i] = cachedTasksMap[taskName]!;
+      }
+    }
+    notifyListeners();
+  }
+
+  Future<void> _saveTasks() async {
+    await _storageService.saveTasks(_tasks);
   }
 
   void startTracking(int index) {
@@ -82,6 +101,7 @@ class TaskService extends ChangeNotifier {
         isTracking: false,
         isPaused: false,
       );
+      _saveTasks();
     }
 
     _activeTimer!.removeListener(_onTimerUpdate);
