@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:time_tracker/models/index.dart';
 import 'package:time_tracker/constants/index.dart';
-import 'package:time_tracker/widgets/timer_display.dart';
-import 'package:time_tracker/widgets/task_control_buttons.dart';
+import 'package:time_tracker/widgets/time_tracker_screen/timer_display.dart';
+import 'package:time_tracker/widgets/time_tracker_screen/task_control_buttons.dart';
 
 class TaskCard extends StatelessWidget {
   final Task task;
@@ -81,7 +81,10 @@ class TaskCard extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 12),
-            TimerDisplay(duration: _displayTime, isActive: isActive),
+            TimerDisplay(
+              duration: _displayTime,
+              isActive: isActive,
+            ),
             const SizedBox(height: 12),
             TaskControlButtons(
               isTracking: task.isTracking,

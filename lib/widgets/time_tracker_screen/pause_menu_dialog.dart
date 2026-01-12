@@ -18,7 +18,9 @@ class PauseMenuDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+      ),
       child: Padding(
         padding: const EdgeInsets.all(24),
         child: Column(
@@ -36,7 +38,10 @@ class PauseMenuDialog extends StatelessWidget {
             const SizedBox(height: 8),
             Text(
               'Pause tracking automatically after:',
-              style: TextStyle(fontSize: 14, color: AppColors.textSecondary),
+              style: TextStyle(
+                fontSize: 14,
+                color: AppColors.textSecondary,
+              ),
             ),
             const SizedBox(height: 24),
             _PauseOption(
@@ -92,7 +97,10 @@ class _PauseOption extends StatelessWidget {
   final String label;
   final VoidCallback onTap;
 
-  const _PauseOption({required this.label, required this.onTap});
+  const _PauseOption({
+    required this.label,
+    required this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -110,7 +118,10 @@ class _PauseOption extends StatelessWidget {
           children: [
             Text(
               label,
-              style: TextStyle(fontSize: 16, color: AppColors.textPrimary),
+              style: TextStyle(
+                fontSize: 16,
+                color: AppColors.textPrimary,
+              ),
             ),
             Icon(
               Icons.arrow_forward_ios,
