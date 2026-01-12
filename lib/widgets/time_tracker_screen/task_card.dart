@@ -71,8 +71,8 @@ class TaskCard extends StatelessWidget {
                     ),
                     child: Text(
                       task.isPaused ? 'Paused' : 'Tracking',
-                      style: const TextStyle(
-                        color: Colors.white,
+                      style: TextStyle(
+                        color: AppColors.white,
                         fontSize: 12,
                         fontWeight: FontWeight.w500,
                       ),

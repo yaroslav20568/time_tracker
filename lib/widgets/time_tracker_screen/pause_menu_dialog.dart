@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:time_tracker/constants/index.dart';
 
 class PauseMenuDialog extends StatelessWidget {
-  final VoidCallback? onPauseNow;
   final VoidCallback? onPause1;
   final VoidCallback? onPause15;
   final VoidCallback? onPause30;
@@ -10,7 +9,6 @@ class PauseMenuDialog extends StatelessWidget {
 
   const PauseMenuDialog({
     super.key,
-    this.onPauseNow,
     this.onPause1,
     this.onPause15,
     this.onPause30,
@@ -41,14 +39,6 @@ class PauseMenuDialog extends StatelessWidget {
               style: TextStyle(fontSize: 14, color: AppColors.textSecondary),
             ),
             const SizedBox(height: 24),
-            _PauseOption(
-              label: 'Pause Now',
-              onTap: () {
-                Navigator.of(context).pop();
-                onPauseNow?.call();
-              },
-            ),
-            const SizedBox(height: 12),
             _PauseOption(
               label: '1 minute',
               onTap: () {

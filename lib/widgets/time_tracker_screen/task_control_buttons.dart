@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:time_tracker/constants/index.dart';
+import 'package:time_tracker/widgets/ui/index.dart';
 
 class TaskControlButtons extends StatelessWidget {
   final bool isTracking;
@@ -24,18 +25,12 @@ class TaskControlButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (!isTracking) {
-      return SizedBox(
-        width: double.infinity,
-        child: ElevatedButton.icon(
-          onPressed: onStart,
-          icon: const Icon(Icons.play_arrow),
-          label: const Text('Start Tracking'),
-          style: ElevatedButton.styleFrom(
-            backgroundColor: AppColors.accent,
-            foregroundColor: Colors.white,
-            padding: const EdgeInsets.symmetric(vertical: 12),
-          ),
-        ),
+      return AppButton(
+        label: 'Start Tracking',
+        icon: Icons.play_arrow,
+        onPressed: onStart,
+        variant: AppButtonVariant.primary,
+        isFullWidth: true,
       );
     }
 
@@ -43,28 +38,20 @@ class TaskControlButtons extends StatelessWidget {
       children: [
         if (isPaused)
           Expanded(
-            child: ElevatedButton.icon(
+            child: AppButton(
+              label: 'Resume',
+              icon: Icons.play_arrow,
               onPressed: onResume,
-              icon: const Icon(Icons.play_arrow),
-              label: const Text('Resume'),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.accent,
-                foregroundColor: Colors.white,
-                padding: const EdgeInsets.symmetric(vertical: 12),
-              ),
+              variant: AppButtonVariant.primary,
             ),
           )
         else
           Expanded(
-            child: ElevatedButton.icon(
+            child: AppButton(
+              label: 'Pause',
+              icon: Icons.pause,
               onPressed: onPause,
-              icon: const Icon(Icons.pause),
-              label: const Text('Pause'),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.warning,
-                foregroundColor: Colors.white,
-                padding: const EdgeInsets.symmetric(vertical: 12),
-              ),
+              variant: AppButtonVariant.secondary,
             ),
           ),
         if (!isPaused) ...[

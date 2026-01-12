@@ -35,9 +35,6 @@ class _TimeTrackerScreenState extends State<TimeTrackerScreen> {
     showDialog(
       context: context,
       builder: (context) => PauseMenuDialog(
-        onPauseNow: () {
-          _taskService.pauseTracking();
-        },
         onPause1: () {
           _taskService.schedulePause(const Duration(minutes: 1));
         },
@@ -70,29 +67,31 @@ class _TimeTrackerScreenState extends State<TimeTrackerScreen> {
       appBar: AppBar(
         title: const Text('Time Tracker'),
         backgroundColor: AppColors.primary,
-        foregroundColor: Colors.white,
+        foregroundColor: AppColors.white,
         elevation: 0,
       ),
-      body: ListView.builder(
-        padding: const EdgeInsets.symmetric(vertical: 8),
-        itemCount: _taskService.tasks.length,
-        itemBuilder: (context, index) {
-          final task = _taskService.tasks[index];
-          final isActive =
-              _taskService.activeTask?.name == task.name && task.isTracking;
-          final currentTime = _getCurrentTime(index);
+      body: SafeArea(
+        child: ListView.builder(
+          padding: const EdgeInsets.symmetric(vertical: 8),
+          itemCount: _taskService.tasks.length,
+          itemBuilder: (context, index) {
+            final task = _taskService.tasks[index];
+            final isActive =
+                _taskService.activeTask?.name == task.name && task.isTracking;
+            final currentTime = _getCurrentTime(index);
 
-          return TaskCard(
-            task: task,
-            isActive: isActive,
-            currentTime: currentTime,
-            onStart: () => _taskService.startTracking(index),
-            onPause: () => _taskService.pauseTracking(),
-            onResume: () => _taskService.resumeTracking(),
-            onStop: () => _taskService.stopTracking(),
-            onPauseMenu: _showPauseMenu,
-          );
-        },
+            return TaskCard(
+              task: task,
+              isActive: isActive,
+              currentTime: currentTime,
+              onStart: () => _taskService.startTracking(index),
+              onPause: () => _taskService.pauseTracking(),
+              onResume: () => _taskService.resumeTracking(),
+              onStop: () => _taskService.stopTracking(),
+              onPauseMenu: _showPauseMenu,
+            );
+          },
+        ),
       ),
     );
   }

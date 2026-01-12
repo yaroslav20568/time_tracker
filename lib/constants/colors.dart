@@ -10,4 +10,5 @@ class AppColors {
   static const Color accent = Color(0xFF4CAF50);
   static const Color error = Color(0xFFF44336);
   static const Color warning = Color(0xFFFF9800);
+  static const Color white = Color(0xFFFFFFFF);
 }
