@@ -10,21 +10,34 @@ class TimeTrackerScreen extends StatefulWidget {
   State<TimeTrackerScreen> createState() => _TimeTrackerScreenState();
 }
 
-class _TimeTrackerScreenState extends State<TimeTrackerScreen> {
+class _TimeTrackerScreenState extends State<TimeTrackerScreen>
+    with WidgetsBindingObserver {
   late final TaskService _taskService;
 
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     _taskService = TaskService();
     _taskService.addListener(_onTaskServiceUpdate);
   }
 
   @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
     _taskService.removeListener(_onTaskServiceUpdate);
+    _taskService.saveCurrentTrackingTime();
     _taskService.dispose();
     super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.paused ||
+        state == AppLifecycleState.detached ||
+        state == AppLifecycleState.hidden) {
+      _taskService.saveCurrentTrackingTime();
+    }
   }
 
   void _onTaskServiceUpdate() {

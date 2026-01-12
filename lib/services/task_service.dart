@@ -132,8 +132,26 @@ class TaskService extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> saveCurrentTrackingTime() async {
+    if (_activeTimer == null || _activeTask == null) return;
+
+    final elapsedTime = _activeTimer!.elapsedTime;
+    final index = _tasks.indexWhere((t) => t.name == _activeTask!.name);
+
+    if (index != -1) {
+      final currentTime = _tasks[index].trackedTime;
+      _tasks[index] = _tasks[index].copyWith(
+        trackedTime: currentTime + elapsedTime,
+      );
+      await _saveTasks();
+
+      _activeTimer!.resetElapsedTime();
+    }
+  }
+
   @override
   void dispose() {
+    saveCurrentTrackingTime();
     _activeTimer?.dispose();
     super.dispose();
   }

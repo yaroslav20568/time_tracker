@@ -106,6 +106,14 @@ class TimerService extends ChangeNotifier {
     notifyListeners();
   }
 
+  void resetElapsedTime() {
+    _elapsedTime = Duration.zero;
+    if (_isRunning && !_isPaused) {
+      _startTime = DateTime.now();
+    }
+    notifyListeners();
+  }
+
   @override
   void dispose() {
     _timer?.cancel();
