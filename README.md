@@ -1,107 +1,81 @@
 # Time Tracker
 
-Приложение для отслеживания времени выполнения задач, разработанное на Flutter.
+Приложение для отслеживания времени выполнения задач.
 
 ## Описание проекта
 
-Time Tracker — мобильное приложение для управления временем работы над различными задачами. Позволяет отслеживать время, затраченное на каждую задачу, с возможностью паузы, возобновления и автоматического сохранения данных.
+Time Tracker - это мобильное приложение на Flutter для отслеживания времени работы над различными задачами. Приложение позволяет пользователям запускать таймер для задач, ставить на паузу, возобновлять отслеживание и автоматически сохранять накопленное время.
 
-## Основной функционал
+## Что было сделано
 
-- Отслеживание времени для нескольких задач одновременно
-- Запуск, пауза и остановка таймера
-- Автоматическая пауза по расписанию (1, 15, 30, 45 минут)
-- Автоматическое сохранение времени при выходе из приложения
-- Сохранение накопленного времени для каждой задачи
-- Адаптивный интерфейс для разных размеров экрана
+- Создана структура проекта с разделением на экраны, виджеты, модели, сервисы и константы
+- Реализован основной экран с отображением списка задач в виде сетки
+- Создана система отслеживания времени с таймером, поддерживающая запуск, паузу и возобновление
+- Реализовано автоматическое сохранение времени при выходе из приложения через обработку lifecycle событий
+- Добавлен диалог планирования паузы с возможностью выбора времени (1, 15, 30, 45 минут) и прокруткой
+- Созданы переиспользуемые виджеты: карточки задач, кнопки управления, отображение таймера
+- Настроены цвета приложения в отдельном файле констант
+- Реализовано сохранение данных о времени выполнения задач в SharedPreferences
+- Адаптирован интерфейс для разных размеров экрана с адаптивной сеткой
+- Добавлена иконка приложения для Android
+- Настроено название приложения "Time Tracker" для Android
 
 ## Используемые пакеты
 
-### Основные зависимости
+- `flutter` - основной фреймворк
+- `shared_preferences` - локальное хранение данных
+- `cupertino_icons` - иконки для iOS стиля
+- `flutter_lints` - линтеры для проверки кода
+- `flutter_launcher_icons` - генерация иконок приложения (dev dependency)
 
-- **shared_preferences** (^2.2.2) — для локального хранения данных о времени выполнения задач
-- **cupertino_icons** (^1.0.8) — набор иконок для iOS-стиля интерфейса
+## Архитектура
 
-### Dev зависимости
+Проект следует принципам SOLID и KISS. Код организован в следующие директории:
 
-- **flutter_launcher_icons** (^0.13.1) — для генерации иконок приложения для различных платформ
-- **flutter_lints** (^6.0.0) — набор правил линтинга для обеспечения качества кода
-
-## Реализованные возможности
-
-1. **Система отслеживания времени** — сервис таймера с возможностью паузы и возобновления
-2. **Сохранение данных** — автоматическое сохранение времени в SharedPreferences
-3. **Обработка lifecycle событий** — сохранение текущего времени при выходе из приложения
-4. **Диалог планирования паузы** — с прокруткой для удобного выбора времени
-5. **Настройка иконки приложения** — генерация иконок для Android платформы
-6. **Локализация названия** — отображение "Time Tracker" в Android-версии
-
-## Установка и запуск
-
-```bash
-flutter pub get
-flutter run
-```
-
-## Генерация иконок
-
-Для генерации иконок приложения используйте:
-
-```bash
-dart run flutter_launcher_icons
-```
+- `lib/screens/` - экраны приложения
+- `lib/widgets/` - переиспользуемые виджеты (карточки задач, кнопки, таймер)
+- `lib/models/` - модели данных (Task)
+- `lib/services/` - бизнес-логика (TimerService, TaskService, StorageService)
+- `lib/constants/` - константы (цвета, список задач)
 
 ---
 
 # Time Tracker
 
-A Flutter application for tracking time spent on tasks.
+A mobile application for tracking time spent on tasks.
 
 ## Project Description
 
-Time Tracker is a mobile application for managing time spent on various tasks. It allows you to track time spent on each task with pause, resume, and automatic data saving capabilities.
+Time Tracker is a Flutter mobile application for tracking time spent on various tasks. The application allows users to start a timer for tasks, pause, resume tracking, and automatically save accumulated time.
 
-## Main Features
+## What Was Done
 
-- Time tracking for multiple tasks simultaneously
-- Start, pause, and stop timer functionality
-- Scheduled automatic pause (1, 15, 30, 45 minutes)
-- Automatic time saving when exiting the application
-- Stored accumulated time for each task
-- Adaptive interface for different screen sizes
+- Created project structure with separation into screens, widgets, models, services, and constants
+- Implemented main screen with task list displayed as a grid
+- Created time tracking system with timer supporting start, pause, and resume
+- Implemented automatic time saving when exiting the application through lifecycle event handling
+- Added scheduled pause dialog with time selection options (1, 15, 30, 45 minutes) and scrolling
+- Created reusable widgets: task cards, control buttons, timer display
+- Configured application colors in a separate constants file
+- Implemented data persistence for task time tracking in SharedPreferences
+- Adapted interface for different screen sizes with adaptive grid
+- Added application icon for Android
+- Configured application name "Time Tracker" for Android
 
 ## Used Packages
 
-### Main Dependencies
+- `flutter` - main framework
+- `shared_preferences` - local data storage
+- `cupertino_icons` - icons for iOS style
+- `flutter_lints` - linters for code checking
+- `flutter_launcher_icons` - application icon generation (dev dependency)
 
-- **shared_preferences** (^2.2.2) — for local storage of task time tracking data
-- **cupertino_icons** (^1.0.8) — icon set for iOS-style interface
+## Architecture
 
-### Dev Dependencies
+The project follows SOLID and KISS principles. Code is organized into the following directories:
 
-- **flutter_launcher_icons** (^0.13.1) — for generating application icons for various platforms
-- **flutter_lints** (^6.0.0) — linting rules for code quality assurance
-
-## Implemented Features
-
-1. **Time tracking system** — timer service with pause and resume capabilities
-2. **Data persistence** — automatic time saving to SharedPreferences
-3. **Lifecycle event handling** — saving current time when exiting the application
-4. **Scheduled pause dialog** — with scrolling for convenient time selection
-5. **Application icon setup** — icon generation for Android platform
-6. **Name localization** — "Time Tracker" display in Android version
-
-## Installation and Running
-
-```bash
-flutter pub get
-flutter run
-```
-
-## Icon Generation
-
-To generate application icons, use:
-
-```bash
-dart run flutter_launcher_icons
-```
+- `lib/screens/` - application screens
+- `lib/widgets/` - reusable widgets (task cards, buttons, timer)
+- `lib/models/` - data models (Task)
+- `lib/services/` - business logic (TimerService, TaskService, StorageService)
+- `lib/constants/` - constants (colors, task list)
