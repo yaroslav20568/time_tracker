@@ -38,6 +38,9 @@ class _TimeTrackerScreenState extends State<TimeTrackerScreen> {
         onPauseNow: () {
           _taskService.pauseTracking();
         },
+        onPause1: () {
+          _taskService.schedulePause(const Duration(minutes: 1));
+        },
         onPause15: () {
           _taskService.schedulePause(const Duration(minutes: 15));
         },

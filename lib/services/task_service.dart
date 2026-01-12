@@ -61,9 +61,20 @@ class TaskService extends ChangeNotifier {
     _activeTask = _tasks[index];
     _activeTimer = TimerService();
     _activeTimer!.addListener(_onTimerUpdate);
+    _activeTimer!.addListener(_onTimerStateChange);
 
     _activeTimer!.start();
     notifyListeners();
+  }
+
+  void _onTimerStateChange() {
+    if (_activeTimer == null || _activeTask == null) return;
+
+    final index = _tasks.indexWhere((t) => t.name == _activeTask!.name);
+    if (index != -1) {
+      _tasks[index] = _tasks[index].copyWith(isPaused: _activeTimer!.isPaused);
+      notifyListeners();
+    }
   }
 
   void pauseTracking() {
@@ -105,6 +116,7 @@ class TaskService extends ChangeNotifier {
     }
 
     _activeTimer!.removeListener(_onTimerUpdate);
+    _activeTimer!.removeListener(_onTimerStateChange);
     _activeTimer!.dispose();
     _activeTimer = null;
     _activeTask = null;

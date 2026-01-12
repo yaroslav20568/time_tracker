@@ -67,12 +67,14 @@ class TaskControlButtons extends StatelessWidget {
               ),
             ),
           ),
-        const SizedBox(width: 8),
-        IconButton(
-          onPressed: onPauseMenu,
-          icon: const Icon(Icons.more_vert),
-          color: AppColors.textSecondary,
-        ),
+        if (!isPaused) ...[
+          const SizedBox(width: 8),
+          IconButton(
+            onPressed: onPauseMenu,
+            icon: const Icon(Icons.more_vert),
+            color: AppColors.textSecondary,
+          ),
+        ],
         const SizedBox(width: 8),
         IconButton(
           onPressed: onStop,
