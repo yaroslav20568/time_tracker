@@ -19,69 +19,82 @@ class PauseMenuDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      child: Padding(
-        padding: const EdgeInsets.all(24),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Schedule Pause',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: AppColors.textPrimary,
+      child: ConstrainedBox(
+        constraints: BoxConstraints(
+          maxHeight: MediaQuery.of(context).size.height * 0.8,
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(24),
+          child: Scrollbar(
+            thumbVisibility: true,
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Schedule Pause',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.textPrimary,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    'Pause tracking automatically after:',
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: AppColors.textSecondary,
+                    ),
+                  ),
+                  const SizedBox(height: 24),
+                  _PauseOption(
+                    label: '1 minute',
+                    onTap: () {
+                      Navigator.of(context).pop();
+                      onPause1?.call();
+                    },
+                  ),
+                  const SizedBox(height: 12),
+                  _PauseOption(
+                    label: '15 minutes',
+                    onTap: () {
+                      Navigator.of(context).pop();
+                      onPause15?.call();
+                    },
+                  ),
+                  const SizedBox(height: 12),
+                  _PauseOption(
+                    label: '30 minutes',
+                    onTap: () {
+                      Navigator.of(context).pop();
+                      onPause30?.call();
+                    },
+                  ),
+                  const SizedBox(height: 12),
+                  _PauseOption(
+                    label: '45 minutes',
+                    onTap: () {
+                      Navigator.of(context).pop();
+                      onPause45?.call();
+                    },
+                  ),
+                  const SizedBox(height: 16),
+                  SizedBox(
+                    width: double.infinity,
+                    child: TextButton(
+                      onPressed: () => Navigator.of(context).pop(),
+                      child: Text(
+                        'Cancel',
+                        style: TextStyle(color: AppColors.textSecondary),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
-            const SizedBox(height: 8),
-            Text(
-              'Pause tracking automatically after:',
-              style: TextStyle(fontSize: 14, color: AppColors.textSecondary),
-            ),
-            const SizedBox(height: 24),
-            _PauseOption(
-              label: '1 minute',
-              onTap: () {
-                Navigator.of(context).pop();
-                onPause1?.call();
-              },
-            ),
-            const SizedBox(height: 12),
-            _PauseOption(
-              label: '15 minutes',
-              onTap: () {
-                Navigator.of(context).pop();
-                onPause15?.call();
-              },
-            ),
-            const SizedBox(height: 12),
-            _PauseOption(
-              label: '30 minutes',
-              onTap: () {
-                Navigator.of(context).pop();
-                onPause30?.call();
-              },
-            ),
-            const SizedBox(height: 12),
-            _PauseOption(
-              label: '45 minutes',
-              onTap: () {
-                Navigator.of(context).pop();
-                onPause45?.call();
-              },
-            ),
-            const SizedBox(height: 16),
-            SizedBox(
-              width: double.infinity,
-              child: TextButton(
-                onPressed: () => Navigator.of(context).pop(),
-                child: Text(
-                  'Cancel',
-                  style: TextStyle(color: AppColors.textSecondary),
-                ),
-              ),
-            ),
-          ],
+          ),
         ),
       ),
     );
