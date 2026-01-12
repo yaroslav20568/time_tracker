@@ -14,6 +14,7 @@ class MyApp extends StatelessWidget {
       title: 'Time Tracker',
       theme: ThemeData(useMaterial3: true),
       home: const TimeTrackerScreen(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
