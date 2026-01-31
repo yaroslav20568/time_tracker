@@ -6,6 +6,10 @@
 
 Time Tracker - это мобильное приложение на Flutter для отслеживания времени работы над различными задачами. Приложение позволяет пользователям запускать таймер для задач, ставить на паузу, возобновлять отслеживание и автоматически сохранять накопленное время.
 
+## Демонстрация
+
+![Демонстрация работы](video/demo.gif)
+
 ## Что было сделано
 
 - Создана структура проекта с разделением на экраны, виджеты, модели, сервисы и константы
@@ -47,6 +51,10 @@ A mobile application for tracking time spent on tasks.
 ## Project Description
 
 Time Tracker is a Flutter mobile application for tracking time spent on various tasks. The application allows users to start a timer for tasks, pause, resume tracking, and automatically save accumulated time.
+
+## Demo
+
+![Demo](video/demo.gif)
 
 ## What Was Done
 
